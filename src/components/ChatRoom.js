@@ -26,7 +26,9 @@ function ChatRoom(props) {
             },
         }).then((res) => {
             console.log(res);
-            setBotMessage(res);
+            const newResponse = { mode: 1, msg: res, id: key.current };
+            key.current += 1;
+            setMessages([...messages, newResponse]);
         });
     };
     const chat = [
