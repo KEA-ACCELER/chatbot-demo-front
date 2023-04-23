@@ -2,13 +2,16 @@ import React, { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Message } from "./Message";
 import axios from "axios";
+import { sendMessage } from "./Controller";
 
 function ChatRoom(props) {
     const [messages, setMessages] = useState([]);
     const [msgInput, setMsgInput] = useState("");
     const [botMessage, setBotMessage] = useState("");
+
     const sendMsgHandler = (msg) => {
-        msg == "" ? alert() : myNewMsg(msg);
+        myNewMsg(msg);
+        sendMessage(msg);
     };
     const myNewMsg = (msg) => {
         const newMsg = { mode: 0, msg: msg, id: key.current };
@@ -32,15 +35,19 @@ function ChatRoom(props) {
         });
     };
     const chat = [
-        { mode: 0, msg: "hello", id: 0 },
-        { mode: 1, msg: "yo", id: 1 },
-        { mode: 0, msg: "hello", id: 2 },
-        { mode: 1, msg: "yo", id: 3 },
-        { mode: 0, msg: "hello", id: 4 },
+        { mode: 0, msg: "안녕", id: 0 },
+        { mode: 1, msg: "안녕하세요", id: 1 },
+        { mode: 0, msg: "배고프다", id: 2 },
+        { mode: 1, msg: "얼른 맛난 음식 드세요.", id: 3 },
+        { mode: 0, msg: "너 지금 뭐해", id: 4 },
+        { mode: 1, msg: "저랑 놀아요.C", id: 5 },
     ];
+    console.log(chat);
     const key = useRef(0);
     return (
         <div className="chat-page">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
             <div className="chat-header">
                 <h2>{props.username}'s Chat Room</h2>
             </div>

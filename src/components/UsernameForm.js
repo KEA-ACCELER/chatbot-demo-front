@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 import Button from "react-bootstrap/Button";
+import { connect } from "./Controller";
 
 function UsernameForm(props) {
     const [username, setUsername] = useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
+        connect(username);
         props.onSubmit(username);
     }
 
